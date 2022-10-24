@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-paginator',
@@ -16,9 +16,12 @@ export class PaginatorComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    // When the total items change the page count should be recalculated.
     if (changes['totalItems'].currentValue) {
+      // The page count is the total items divided by the page length rounded up
+      // to the nearest whole number.
       this.pageCount = Math.ceil(
-        (changes['totalItems'].currentValue / this.pageLength));
+          (changes['totalItems'].currentValue / this.pageLength));
     }
   }
 
@@ -29,6 +32,8 @@ export class PaginatorComponent implements OnChanges {
 
   handleDecrementPage(): void {
     const newPageNumber = this.currentPage - 1;
+
+    // If the user is trying to move down from page one, return.
     if (newPageNumber < 1) {
       return;
     }
@@ -38,14 +43,12 @@ export class PaginatorComponent implements OnChanges {
 
   handleIncrementPage(): void {
     const newPageNumber = this.currentPage + 1;
+
+    // If the user is trying to move up from the last page , return.
     if (this.pageCount + 1 == newPageNumber) {
       return;
     }
 
     this.handlePageChange(newPageNumber);
-  }
-
-  pageCountAsArray(): Array<number> {
-    return new Array<number>(this.pageCount);
   }
 }

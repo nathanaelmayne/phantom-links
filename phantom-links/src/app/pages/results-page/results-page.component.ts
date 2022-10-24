@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Bookmark } from 'src/app/models/bookmark.model';
-import { BookmarkService } from 'src/app/services/bookmark.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Bookmark} from 'src/app/models/bookmark.model';
+import {BookmarkService} from 'src/app/services/bookmark.service';
 
 @Component({
   selector: 'app-results-page',
@@ -18,11 +18,13 @@ export class ResultsPageComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    // Subscribe to the current route query parameters to retrieve
+    // the bookmark id to display results for.
     this.route.queryParams
-      .subscribe((params) => {
-        this.bookmarkId = params['id'];
-        this.getBookmark();
-      });
+        .subscribe((params) => {
+          this.bookmarkId = params['id'];
+          this.getBookmark();
+        });
   }
 
   getBookmark(): void {
@@ -30,11 +32,14 @@ export class ResultsPageComponent implements OnInit {
       return;
     }
 
+    // Get the bookmark by the given id.
     this.bookmark = this.bookmarkService
-      .get(this.bookmarkId);
+        .get(this.bookmarkId);
   }
 
   handleBackClicked(): void {
+    // If user clicks the back button then it should return
+    // to the default page (Overview).
     this.router.navigate(['']);
   }
 }

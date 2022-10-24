@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Bookmark } from 'src/app/models/bookmark.model';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import {Component, Inject} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Bookmark} from 'src/app/models/bookmark.model';
+import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-edit-bookmark-dialog',

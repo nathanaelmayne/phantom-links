@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import {AbstractControl, ValidatorFn} from '@angular/forms';
 
 export const urlIsValid: ValidatorFn = (control: AbstractControl) => {
   const url = control.value;
@@ -14,5 +14,5 @@ export const urlIsValid: ValidatorFn = (control: AbstractControl) => {
     '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
 
   const valid = !!pattern.test(url);
-  return valid ? null : { urlInvalid: true };
+  return valid ? null : {urlInvalid: true};
 };
