@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { BookmarkService } from 'src/app/services/bookmark.service';
 import { uuidv4 } from 'src/app/utils/uuid.utils';
+import { urlIsValid } from 'src/app/validators/url-is-valid.validator';
 
 @Component({
   selector: 'app-bookmark-form',
@@ -10,7 +11,7 @@ import { uuidv4 } from 'src/app/utils/uuid.utils';
   styleUrls: ['./bookmark-form.component.scss'],
 })
 export class BookmarkFormComponent implements OnInit {
-  url: FormControl = new FormControl('');
+  url: FormControl = new FormControl('', [urlIsValid, this.duplicateUrlValidator()]);
 
   @Input() bookmark: Bookmark | undefined;
   @Output() bookmarkSubmit = new EventEmitter<Bookmark>();
@@ -51,5 +52,21 @@ export class BookmarkFormComponent implements OnInit {
 
     this.bookmark.url = this.url.value;
     this.bookmarkSubmit.emit(this.bookmark);
+  }
+
+  duplicateUrlValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+
+      if (!value) {
+        return null;
+      }
+
+      const duplicate = this.bookmarkService.list()
+        .filter((b) => this.bookmark ? this.bookmark.id !== b.id : true)
+        .find((b) => b.url.toLowerCase() == value.toLowerCase());
+
+      return duplicate ? { duplicateUrl: true } : null;
+    };
   }
 }

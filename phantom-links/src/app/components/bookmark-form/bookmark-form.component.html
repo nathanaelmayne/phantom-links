@@ -4,6 +4,14 @@
            type="url"
            placeholder="Enter URL to bookmark"
            [formControl]="url">
+    <span class="validation-error"
+          *ngIf="url.errors && url.errors['urlInvalid']">
+      Url is invalid
+    </span>
+    <span class="validation-error"
+          *ngIf="url.errors && url.errors['duplicateUrl']">
+      A bookmark with that url already exists
+    </span>
   </div>
   <div class="justify-center flex-column button-wrapper">
     <ng-container *ngIf="bookmark; else elseTemplate">
