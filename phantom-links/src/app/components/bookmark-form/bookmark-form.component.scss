@@ -1,0 +1,21 @@
+.bookmark-form {
+  gap: 24px;
+  height: 80px;
+
+  .url-input {
+    width: 100%;
+    border: 1px solid black;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  .url-input-wrapper {
+    width: 100%;
+  }
+
+  .button-wrapper {
+    height: 48px;
+  }
+}

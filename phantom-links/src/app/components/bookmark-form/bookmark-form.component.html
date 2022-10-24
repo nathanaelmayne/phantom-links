@@ -1,0 +1,20 @@
+<div class="bookmark-form flex-row">
+  <div class="flex-column url-input-wrapper">
+    <input class="url-input"
+           type="url"
+           placeholder="Enter URL to bookmark"
+           [formControl]="url">
+  </div>
+  <div class="justify-center flex-column button-wrapper">
+    <ng-container *ngIf="bookmark; else elseTemplate">
+      <button class="button"
+              [disabled]="!url.valid || !url.value"
+              (click)="handleUpdateBookmark()">Update</button>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <button class="button"
+              [disabled]="!url.valid || !url.value"
+              (click)="handleAddBookmark()">Add</button>
+    </ng-template>
+  </div>
+</div>
