@@ -1,5 +1,25 @@
 <div class="overview-container flex-column">
   <app-bookmark-form (bookmarkSubmit)="handleBookmarkSubmitted($event)"></app-bookmark-form>
   <app-table [items]="bookmarks"
-             [columns]="tableColumns"></app-table>
+             [columns]="tableColumns"
+             [buttonTemplate]="tableButtonTemplate"></app-table>
 </div>
+
+<ng-template #tableButtonTemplate
+             let-item>
+  <button class="more-icon"
+          mat-icon-button
+          [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item
+            (click)="onEditClick(item)">
+      <span>Edit</span>
+    </button>
+    <button mat-menu-item
+            (click)="onDeleteClick(item)">
+      <span>Delete</span>
+    </button>
+  </mat-menu>
+</ng-template>

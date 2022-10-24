@@ -6,7 +6,7 @@ import { BookmarkService } from 'src/app/services/bookmark.service';
 @Component({
   selector: 'app-overview-page',
   templateUrl: './overview-page.component.html',
-  styleUrls: ['./overview.page.component.scss'],
+  styleUrls: ['./overview-page.component.scss'],
 })
 export class OverviewPageComponent implements OnInit {
   bookmarks: Bookmark[] = [];
@@ -31,5 +31,13 @@ export class OverviewPageComponent implements OnInit {
   handleRemoveBookmark(url: string): void {
     this.bookmarkService.remove(url);
     this.bookmarks = this.bookmarkService.list();
+  }
+
+  onEditClick(bookmark: Bookmark): void {
+
+  }
+
+  onDeleteClick(bookmark: Bookmark): void {
+
   }
 }

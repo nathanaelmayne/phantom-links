@@ -12,6 +12,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { EnumerateNumberPipe } from './pipes/enumerate-number.pipe';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { EnumerateNumberPipe } from './pipes/enumerate-number.pipe';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatIconModule,
+    MatMenuModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
