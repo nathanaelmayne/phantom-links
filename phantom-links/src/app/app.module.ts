@@ -14,6 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { EnumerateNumberPipe } from './pipes/enumerate-number.pipe';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { EditBookmarkDialogComponent } from './components/edit-bookmark-dialog/edit-bookmark-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     TableComponent,
     PaginatorComponent,
     EnumerateNumberPipe,
+    ConfirmDialogComponent,
+    EditBookmarkDialogComponent,
   ],
   imports: [
     BrowserModule,

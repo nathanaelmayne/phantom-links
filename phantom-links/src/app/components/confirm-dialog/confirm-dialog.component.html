@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Delete</h1>
+<div mat-dialog-content>
+  {{data.message}}
+</div>
+<div mat-dialog-actions>
+  <span class="fill-space"></span>
+  <button class="button"
+          mat-button
+          color="error"
+          [mat-dialog-close]="true"
+          cdkFocusInitial>
+    {{data.confirmText}}
+  </button>
+  <button class="button"
+          mat-button
+          mat-dialog-close>Cancel</button>
+</div>
