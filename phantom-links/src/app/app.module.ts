@@ -7,6 +7,11 @@ import { OverviewPageComponent } from './pages/overview-page/overview-page.compo
 import { ResultsPageComponent } from './pages/results-page/results-page.component';
 import { BookmarkFormComponent } from './components/bookmark-form/bookmark-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TableComponent } from './components/table/table.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { EnumerateNumberPipe } from './pipes/enumerate-number.pipe';
 
 @NgModule({
   declarations: [
@@ -14,11 +19,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     OverviewPageComponent,
     ResultsPageComponent,
     BookmarkFormComponent,
+    TableComponent,
+    PaginatorComponent,
+    EnumerateNumberPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

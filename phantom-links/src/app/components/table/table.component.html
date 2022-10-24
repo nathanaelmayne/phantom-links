@@ -1,0 +1,26 @@
+<table>
+  <thead></thead>
+  <tbody>
+    <tr *ngIf="(!items || items.length === 0)">
+      <div class="no-items-message">No bookmarks to display</div>
+    </tr>
+    <tr class="row"
+        *ngFor="let item of getPagedItems()">
+      <td *ngFor="let column of columns"
+          class="cell">
+        {{getCellItem(item, column)}}
+      </td>
+      <td *ngIf="buttonTemplate"
+          class="cell button-cell">
+        <div>
+          <ng-container [ngTemplateOutlet]="buttonTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: item }">
+          </ng-container>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-paginator [totalItems]="items.length"
+               [pageLength]="pageLength"
+               (pageChange)="currentPage = $event"></app-paginator>

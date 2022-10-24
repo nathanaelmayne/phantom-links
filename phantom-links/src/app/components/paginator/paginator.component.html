@@ -1,0 +1,20 @@
+<ng-container *ngIf="pageCount > 1">
+  <div class="page-numbers-wrapper flex-row">
+    <div class="chevron"
+         (click)="handleDecrementPage()">
+      <mat-icon>chevron_left</mat-icon>
+    </div>
+    <div class="flex-row">
+      <div class="page-number"
+           *ngFor="let i of pageCount | enumerateNumber"
+           [ngClass]="{'current-page': i + 1 === currentPage}"
+           (click)="handlePageChange(i + 1)">
+        {{ i + 1 }}
+      </div>
+    </div>
+    <div class="chevron"
+         (click)="handleIncrementPage()">
+      <mat-icon>chevron_right</mat-icon>
+    </div>
+  </div>
+</ng-container>

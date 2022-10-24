@@ -1,1 +1,5 @@
-<app-bookmark-form></app-bookmark-form>
+<div class="overview-container flex-column">
+  <app-bookmark-form (bookmarkSubmit)="handleBookmarkSubmitted($event)"></app-bookmark-form>
+  <app-table [items]="bookmarks"
+             [columns]="tableColumns"></app-table>
+</div>

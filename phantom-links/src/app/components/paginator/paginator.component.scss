@@ -1,0 +1,33 @@
+.page-numbers-wrapper {
+  justify-content: center;
+  align-items: center;
+}
+
+.chevron {
+  padding: 12px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.page-number {
+  padding: 12px;
+  border-top: 1px solid #c7c7c7;
+  border-right: 1px solid #c7c7c7;
+  border-bottom: 1px solid #c7c7c7;
+
+  &:first-of-type {
+    padding: 12px;
+    border-left: 1px solid #c7c7c7;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.current-page,
+  &:hover {
+    background-color: #f3f0f0;
+  }
+}
