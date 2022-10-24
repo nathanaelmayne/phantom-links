@@ -1,15 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import {Bookmark} from 'src/app/models/bookmark.model';
-import {BookmarkService} from 'src/app/services/bookmark.service';
-import {uuidv4} from 'src/app/utils/uuid.utils';
-import {urlIsValid} from 'src/app/validators/url-is-valid.validator';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { Bookmark } from 'src/app/models/bookmark.model';
+import { BookmarkService } from 'src/app/services/bookmark.service';
+import { uuidv4 } from 'src/app/utils/uuid.utils';
+import { urlIsValid } from 'src/app/validators/url-is-valid.validator';
 
 @Component({
   selector: 'app-bookmark-form',
   templateUrl: './bookmark-form.component.html',
   styleUrls: ['./bookmark-form.component.scss'],
 })
+
+/**
+  A component containing the bookmark form.
+*/
 export class BookmarkFormComponent implements OnInit {
   url: FormControl = new FormControl('', [urlIsValid, this.duplicateUrlValidator()]);
 
@@ -19,6 +23,10 @@ export class BookmarkFormComponent implements OnInit {
   constructor(
     private bookmarkService: BookmarkService) { }
 
+  /**
+  * The on initilization hook for this component.
+  * @return {void}
+  */
   ngOnInit(): void {
     // If a bookmark has been passed into the component, then set the url control
     // to the passed in bookmarks url.
@@ -27,6 +35,10 @@ export class BookmarkFormComponent implements OnInit {
     }
   }
 
+  /**
+  * Handles the add bookmark button click.
+  * @return {void}
+  */
   handleAddBookmark(): void {
     if (!this.url.valid) {
       return;
@@ -51,6 +63,10 @@ export class BookmarkFormComponent implements OnInit {
     this.bookmarkSubmit.emit(bookmark);
   }
 
+  /**
+  * Handles the update bookmark button click.
+  * @return {void}
+  */
   handleUpdateBookmark(): void {
     if (!this.url.valid || !this.url.value || !this.bookmark) {
       return;
@@ -60,6 +76,10 @@ export class BookmarkFormComponent implements OnInit {
     this.bookmarkSubmit.emit(this.bookmark);
   }
 
+  /**
+  * A validator to check for bookmark duplicates.
+  * @return {ValidatorFn}
+  */
   duplicateUrlValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
@@ -71,10 +91,10 @@ export class BookmarkFormComponent implements OnInit {
       // Find any bookmarks in the collection that don't have the same id
       // but have the same URL.
       const duplicate = this.bookmarkService.list()
-          .filter((b) => this.bookmark ? this.bookmark.id !== b.id : true)
-          .find((b) => b.url.toLowerCase() == value.toLowerCase());
+        .filter((b) => this.bookmark ? this.bookmark.id !== b.id : true)
+        .find((b) => b.url.toLowerCase() == value.toLowerCase());
 
-      return duplicate ? {duplicateUrl: true} : null;
+      return duplicate ? { duplicateUrl: true } : null;
     };
   }
 }

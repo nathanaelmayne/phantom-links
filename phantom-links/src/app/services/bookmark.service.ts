@@ -5,6 +5,10 @@ import {Bookmark} from '../models/bookmark.model';
 @Injectable({
   providedIn: 'root',
 })
+
+/**
+  A service to maintain bookmarks in the collection.
+*/
 export class BookmarkService {
   readonly BOOKMARKS_KEY = 'BOOkMARKS';
 
@@ -36,6 +40,7 @@ export class BookmarkService {
 
   /**
    * Gets a bookmark from the collection
+   * @param {string} bookmarkId
    * @return {Bookmark}
    */
   get(bookmarkId: string): Bookmark | undefined {
@@ -48,7 +53,8 @@ export class BookmarkService {
 
   /**
    * Adds a bookmark to the collection.
-   * @return {Bookmark}
+    * @param {Bookmark} bookmark
+   * @return {void}
    */
   add(bookmark: Bookmark): void {
     const bookmarks = this.list();

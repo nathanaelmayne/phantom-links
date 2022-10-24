@@ -1,3 +1,7 @@
+/**
+  * Generate a UUID with 4 parts.
+  * @return {string} The UUID.
+  */
 export function uuidv4(): string {
   const stringArr = [];
   for (let i = 0; i < 4; i++) {

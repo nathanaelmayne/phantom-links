@@ -5,6 +5,10 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
 })
+
+/**
+  A component containing the table paginator.
+*/
 export class PaginatorComponent implements OnChanges {
   @Input() totalItems: number = 0;
   @Input() pageLength: number = 20;
@@ -15,6 +19,11 @@ export class PaginatorComponent implements OnChanges {
 
   constructor() { }
 
+  /**
+  * The on changes hook for this component.
+  * @param {SimpleChanges} changes
+  * @return {void}
+  */
   ngOnChanges(changes: SimpleChanges): void {
     // When the total items change the page count should be recalculated.
     if (changes['totalItems'].currentValue) {
@@ -25,11 +34,20 @@ export class PaginatorComponent implements OnChanges {
     }
   }
 
+  /**
+  * Handle the paginator page change
+  * @param {number} pageNumber
+  * @return {void}
+  */
   handlePageChange(pageNumber: number): void {
     this.currentPage = pageNumber;
     this.pageChange.emit(pageNumber);
   }
 
+  /**
+  * Handle the paginator page decreasing
+  * @return {void}
+  */
   handleDecrementPage(): void {
     const newPageNumber = this.currentPage - 1;
 
@@ -41,6 +59,10 @@ export class PaginatorComponent implements OnChanges {
     this.handlePageChange(newPageNumber);
   }
 
+  /**
+  * Handle the paginator page increasing
+  * @return {void}
+  */
   handleIncrementPage(): void {
     const newPageNumber = this.currentPage + 1;
 

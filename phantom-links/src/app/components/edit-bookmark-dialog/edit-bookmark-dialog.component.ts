@@ -9,6 +9,10 @@ import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component
   templateUrl: './edit-bookmark-dialog.component.html',
   styleUrls: ['./edit-bookmark-dialog.component.scss'],
 })
+
+/**
+  A component containing the edit bookmark dialog.
+*/
 export class EditBookmarkDialogComponent {
   url = new FormControl('');
 
