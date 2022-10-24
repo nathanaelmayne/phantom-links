@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Bookmark } from '../models/bookmark.model';
 
 @Injectable({
@@ -8,11 +8,13 @@ import { Bookmark } from '../models/bookmark.model';
 export class BookmarkService {
   readonly BOOKMARKS_KEY = 'BOOkMARKS';
 
-  private bookmarkAddedSubject$ = new BehaviorSubject<Bookmark | undefined>(undefined);
-  private bookmarkUpdatedSubject$ = new BehaviorSubject<Bookmark | undefined>(undefined);
+  private bookmarkAddedSubject$ = new Subject<Bookmark>();
+  private bookmarkUpdatedSubject$ = new Subject<Bookmark>();
+  private bookmarkRemovedSubject$ = new Subject<string>();
 
   $bookmarkAdded = this.bookmarkAddedSubject$.asObservable();
   $bookmarkUpdated = this.bookmarkUpdatedSubject$.asObservable();
+  $bookmarkRemoved = this.bookmarkRemovedSubject$.asObservable();
 
   list(): Bookmark[] {
     const jsonString = localStorage.getItem(this.BOOKMARKS_KEY);
@@ -21,8 +23,7 @@ export class BookmarkService {
     }
 
     const bookmarks = JSON.parse(jsonString) as Bookmark[];
-
-    return bookmarks.sort((a, b) => a.date < b.date ? 1 : -1);
+    return bookmarks;
   }
 
   get(bookmarkId: string): Bookmark | undefined {
@@ -64,7 +65,7 @@ export class BookmarkService {
     }
 
     bookmarks.splice(index, 1);
-
     localStorage.setItem(this.BOOKMARKS_KEY, JSON.stringify(bookmarks));
+    this.bookmarkRemovedSubject$.next(id);
   }
 }

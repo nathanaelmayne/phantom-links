@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Params, Router } from '@angular/router';
+import { combineLatest, startWith } from 'rxjs';
 import { ConfirmDialogComponent, ConfirmDialogData } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { EditBookmarkDialogComponent } from 'src/app/components/edit-bookmark-dialog/edit-bookmark-dialog.component';
 import { Bookmark } from 'src/app/models/bookmark.model';
@@ -21,7 +22,21 @@ export class OverviewPageComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.bookmarks = this.bookmarkService.list();
+    this.populateList();
+
+    combineLatest([
+      this.bookmarkService.$bookmarkAdded.pipe(startWith(undefined)),
+      this.bookmarkService.$bookmarkUpdated.pipe(startWith(undefined)),
+      this.bookmarkService.$bookmarkRemoved.pipe(startWith(undefined)),
+    ]).subscribe(res => {
+      if (res.find(r => r))
+        this.populateList();
+    })
+  }
+
+  populateList() {
+    this.bookmarks = this.bookmarkService.list()
+      .sort((a, b) => a.date < b.date ? 1 : -1);
   }
 
   handleBookmarkSubmitted(bookmark: Bookmark): void {
@@ -34,7 +49,6 @@ export class OverviewPageComponent implements OnInit {
 
   handleRemoveBookmark(url: string): void {
     this.bookmarkService.remove(url);
-    this.bookmarks = this.bookmarkService.list();
   }
 
   onEditClick(bookmark: Bookmark): void {
@@ -45,7 +59,6 @@ export class OverviewPageComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.bookmarkService.update(bookmark);
-          this.bookmarks = this.bookmarkService.list();
         }
       });
   }
@@ -61,7 +74,6 @@ export class OverviewPageComponent implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.bookmarkService.remove(bookmark.id);
-          this.bookmarks = this.bookmarkService.list();
         }
       });
   }
