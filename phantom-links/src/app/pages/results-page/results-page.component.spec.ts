@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ResultsPageComponent } from './results-page.component';
+import {ResultsPageComponent} from './results-page.component';
 
 describe('ResultsPageComponent', () => {
   let component: ResultsPageComponent;
@@ -8,9 +8,9 @@ describe('ResultsPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResultsPageComponent ]
+      declarations: [ResultsPageComponent],
     })
-    .compileComponents();
+        .compileComponents();
 
     fixture = TestBed.createComponent(ResultsPageComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BookmarkFormComponent } from './bookmark-form.component';
+import {BookmarkFormComponent} from './bookmark-form.component';
 
 describe('BookmarkFormComponent', () => {
   let component: BookmarkFormComponent;
@@ -8,9 +8,9 @@ describe('BookmarkFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BookmarkFormComponent ]
+      declarations: [BookmarkFormComponent],
     })
-    .compileComponents();
+        .compileComponents();
 
     fixture = TestBed.createComponent(BookmarkFormComponent);
     component = fixture.componentInstance;

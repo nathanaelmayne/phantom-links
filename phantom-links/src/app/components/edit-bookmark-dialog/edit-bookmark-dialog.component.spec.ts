@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EditBookmarkDialogComponent } from './edit-bookmark-dialog.component';
+import {EditBookmarkDialogComponent} from './edit-bookmark-dialog.component';
 
 describe('EditBookmarkDialogComponent', () => {
   let component: EditBookmarkDialogComponent;
@@ -8,9 +8,9 @@ describe('EditBookmarkDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditBookmarkDialogComponent ]
+      declarations: [EditBookmarkDialogComponent],
     })
-    .compileComponents();
+        .compileComponents();
 
     fixture = TestBed.createComponent(EditBookmarkDialogComponent);
     component = fixture.componentInstance;
