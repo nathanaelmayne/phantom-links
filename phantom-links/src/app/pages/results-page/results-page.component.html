@@ -1,1 +1,21 @@
-<p>results-page works!</p>
+<div class="results flex-column"
+     *ngIf="bookmark; else elseTemplate">
+  <div>
+    Thank you for your submission!
+  </div>
+  <div>
+    Bookmark URL: {{bookmark.url}}
+  </div>
+</div>
+<ng-template #elseTemplate>
+  <div class="not-found">
+    Bookmark not found
+  </div>
+</ng-template>
+<div class="flex-row button-wrapper">
+  <div class="justify-center flex-column">
+    <button class="button"
+            (click)="handleBackClicked()">Back</button>
+  </div>
+  <div class="fill-space"></div>
+</div>
